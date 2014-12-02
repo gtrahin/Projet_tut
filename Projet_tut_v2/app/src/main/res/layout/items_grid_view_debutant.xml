@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="110dp" android:layout_height="110dp"
+    android:background="#ff0003ff"
+    android:gravity="center"
+    android:autoText="true"
+    android:id="@+id/itemGridView">
+
+</TextView>

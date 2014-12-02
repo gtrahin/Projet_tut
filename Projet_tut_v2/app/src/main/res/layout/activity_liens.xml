@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:gravity="center"
+        android:id="@+id/Layout_navBar"
+        android:paddingTop="@dimen/activity_horizontal_margin">
+
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:id="@+id/butGeo"
+            android:background="@drawable/geo" />
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:id="@+id/butLiens"
+            android:background="@drawable/fiches_bleu" />
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:id="@+id/butFiches"
+            android:background="@drawable/fiches"
+            android:adjustViewBounds="true" />
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:id="@+id/butUrgence"
+            android:background="@drawable/urgence" />
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:id="@+id/butAutres"
+            android:background="@drawable/autre" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ministereInterieur"
+            android:background="@drawable/logoministere"
+            android:layout_marginRight="30dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gendarmerieNational"
+            android:background="@drawable/logogendarmerienationale"
+            android:adjustViewBounds="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="1dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/facebook"
+            android:background="@drawable/logofacebook" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/separationevenements" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="283dp"
+        android:id="@+id/listViewEvenements"
+        android:layout_gravity="center"
+        android:layout_marginTop="35dp" />
+
+</FrameLayout>

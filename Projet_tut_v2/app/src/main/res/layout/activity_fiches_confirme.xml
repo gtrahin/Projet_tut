@@ -1,0 +1,59 @@
+<FrameLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Main_layout">
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/listFiches"
+        android:layout_gravity="top"
+        android:layout_marginBottom="@android:dimen/app_icon_size"
+        android:headerDividersEnabled="true"
+        android:choiceMode="singleChoice" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:gravity="center"
+        android:id="@+id/Layout_navBar"
+        android:paddingTop="@dimen/activity_horizontal_margin">
+
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:id="@+id/butGeo"
+            android:background="@drawable/geo" />
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:id="@+id/butLiens"
+            android:background="@drawable/lien" />
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:id="@+id/butFiches"
+            android:background="@drawable/fiches_bleu"
+            android:adjustViewBounds="true" />
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:id="@+id/butUrgence"
+            android:background="@drawable/urgence" />
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:id="@+id/butAutres"
+            android:background="@drawable/autre" />
+
+    </LinearLayout>
+
+</FrameLayout>

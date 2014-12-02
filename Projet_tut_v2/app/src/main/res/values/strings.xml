@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Gendarmerie de Haute-saône</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="geo">GeoActivity</string>
+    <string name="fichesDebutant">FichesDebutantActivity</string>
+    <string name="fichesConfirme">FichesConfirmeActivity</string>
+    <string name="liens">LienActivity</string>
+    <string name="acceuil.png">acceuil</string>
+    <string name="title_activity_geo">Map</string>
+    <string name="API_KEY">AIzaSyCEdozBDaJ7WXRTlQYxOoLqditcMFLvx3w</string>
+
+
+</resources>
