@@ -1,3 +1,9 @@
+<FrameLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Main_layout">
+
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,4 +12,34 @@
     tools:context="gael.projet_tut_v2.GeoActivity"
     android:name="com.google.android.gms.maps.SupportMapFragment"/>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="322dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|bottom"
+        android:weightSum="1"
+        android:clickable="true">
 
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/naviguer"
+            android:layout_gravity="center_horizontal|bottom"
+            android:cropToPadding="false"
+            android:background="@drawable/ic_launcher"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:layout_width="133dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Rechercher la gendarmerie la plus proche"
+            android:id="@+id/textView"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.31" />
+    </LinearLayout>
+
+
+</FrameLayout>

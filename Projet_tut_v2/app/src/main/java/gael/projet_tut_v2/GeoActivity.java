@@ -1,21 +1,74 @@
 package gael.projet_tut_v2;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.List;
 
 public class GeoActivity extends FragmentActivity implements LocationListener{
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+
+    public ImageButton butRechercheGendarmerie; //bouton de recherche de la gendarmerie la plus proche
+    public ButtonListennerRechercheGendarmerie buttonListenerRechercheGendarmerie;
+
+    public String adresses[] = {
+            "1 Rue du Marechal Juin Vesoul",
+            "11 Avenue de la Gare Port-sur-saone",
+            "2 Faubourg de Cour Noroy-le-bourg",
+            "2 Rue de la Grande-Cote Saulx",
+            "2 Rue du Bourg Scey-sur-Saone-et-Saint-Albin",
+            "7 Faubourg de Besancon Hericourt",
+            "12 Rue Pasteur Lure",
+            "Route de Lure Melisey",
+            "6 Avenue de la Gare Champagney",
+            "147 Rue du 13 Septembre 1944 Villersexel",
+            "2 Rue du Maréchal Leclerc Luxeuil-les-Bains",
+            "47 Avenue Albert Thomas Saint-Loup-sur-Semouse",
+            "13 Rue des Chars Faucogney-et-la-Mer",
+            "17 Rue Maurice Signard Gray",
+            "37 Rue Carnot Dampierre-sur-Salon",
+            "100 Grande Rue Gy",
+            "Route de Chaumercenne Pesmes"
+    };
+
+    public double coordoneGPS[][]= {
+
+            {47.644028,6.163056},
+            {47.689044,6.050178},
+            {47.612964,6.308509},
+            {47.697663,6.285037},
+            {47.664202,5.972191},
+            {47.572883,6.75116},
+            {47.684653,6.497184},
+            {47.745024,6.560603},
+            {47.704574,6.688561},
+            {47.549753,6.433814},
+            {47.819485,6.36448},
+            {47.882318,6.289264},
+            {47.837653,6.562144},
+            {47.445617,5.594605},
+            {47.558056,5.681848},
+            {47.404151,5.809493},
+            {47.27989,5.563187}
+
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +118,13 @@ public class GeoActivity extends FragmentActivity implements LocationListener{
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
+
+        buttonListenerRechercheGendarmerie = new ButtonListennerRechercheGendarmerie(this); //initalisation du listenner pour le bouton de recherche
+        butRechercheGendarmerie = (ImageButton)findViewById(R.id.naviguer); //obtention du bouton de recherche de la gendarmerie la plus proche
+        butRechercheGendarmerie.setOnClickListener(buttonListenerRechercheGendarmerie);
+
         mMap.setMyLocationEnabled(true); //affiche le point bleu de ma position
+
 
         //permet d'effectuer le zoom sur ma position a l'ouverture
         GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
@@ -88,6 +147,59 @@ public class GeoActivity extends FragmentActivity implements LocationListener{
         CameraUpdateFactory.newLatLngZoom(latlng,zoom);*/
 
         //mMap.addMarker(new MarkerOptions().position(new LatLng(nMap., 6.8395726)).title("Marker"));
+    }
+
+    public void lancerNavigation(){
+
+        int taille = adresses.length; //renvoie la taille du tableau || nombre de gendarmerie enrengistrée
+
+        Location myLocation = mMap.getMyLocation(); //renvoie location actuelle
+        LatLng loc = new LatLng (myLocation.getLatitude(), myLocation.getLongitude()); //renvoie la location sous la forme d'un tableau [lat][long]
+
+        float meilleursDistance = 0;
+        float currentDistance =0;
+        int placeMeilleursDistance = 0;
+
+        //initialisation de la location de la premiere gendarmerie du tableau
+        Location currentLocation = new Location("");
+        currentLocation.setLatitude(coordoneGPS[0][0]);
+        currentLocation.setLongitude(coordoneGPS[0][1]);
+
+
+        meilleursDistance = myLocation.distanceTo(currentLocation);
+
+        for(int i = 1 ; i<taille ; i++){
+
+            currentLocation.setLatitude(coordoneGPS[i][0]);
+            currentLocation.setLongitude(coordoneGPS[i][1]);
+            currentDistance = myLocation.distanceTo(currentLocation);
+
+            if(currentDistance < meilleursDistance){
+
+                meilleursDistance = currentDistance;
+                placeMeilleursDistance = i;
+            }
+
+        }
+
+        String destination = adresses[placeMeilleursDistance];
+
+        Geocoder geocoder = new Geocoder(this.getBaseContext());
+        List<Address> listeDepart= null;
+
+        try {
+            listeDepart = geocoder.getFromLocation(myLocation.getLatitude(), myLocation.getLongitude(), 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String depart = listeDepart.get(0).getAddressLine(0)+" "+listeDepart.get(0).getAddressLine(1); //stockage de l'adresse
+
+
+        Log.e("Ma position : ",depart);
+
+
+        new ItineraireTask(this, mMap, depart,  destination).execute();
     }
 
 
